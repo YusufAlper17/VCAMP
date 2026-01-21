@@ -1,0 +1,644 @@
+/* ============================================
+   Home Page - Sequential Animation Flow
+   ============================================ */
+
+.home {
+    min-height: 100vh;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Cursor Control - Hidden until animations complete */
+.home.cursor-hidden,
+.home.cursor-hidden * {
+    cursor: none !important;
+}
+
+.home.cursor-visible,
+.home.cursor-visible * {
+    cursor: none;
+    /* Still custom cursor on home */
+}
+
+/* ============================================
+   Light Rays Background
+   ============================================ */
+.light-rays-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 1.5s ease-out;
+}
+
+.light-rays-bg.visible {
+    opacity: 1;
+}
+
+/* ============================================
+   Grid Lines & Particles
+   ============================================ */
+.grid-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.grid-lines.visible {
+    opacity: 0.5;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.particles.visible {
+    opacity: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: floatMinimal 20s infinite;
+}
+
+@keyframes floatMinimal {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.15;
+    }
+
+    90% {
+        opacity: 0.15;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(30px);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   Sound Toggle
+   ============================================ */
+.sound-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 1px solid var(--gray-600);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    z-index: 100;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.sound-toggle:hover {
+    border-color: #fff;
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sound-toggle.playing {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   Logo Splash - STAYS IN CENTER
+   ============================================ */
+.logo-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+/* Dark phase - completely black */
+.logo-splash.dark {
+    background: #000;
+}
+
+.logo-splash.dark .splash-logo {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.logo-splash.dark .logo-glow {
+    opacity: 0;
+}
+
+/* Logo phase - logo appears with animation */
+.logo-splash.logo {
+    background: #000;
+}
+
+.logo-splash.logo .splash-logo {
+    animation: logoReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Logo settled - stays visible, pulse glow */
+.logo-splash.logoSettled {
+    background: #000;
+}
+
+.logo-splash.logoSettled .splash-logo {
+    opacity: 1;
+    transform: scale(1);
+    animation: logoPulseGlow 1s ease-in-out infinite;
+}
+
+/* Light rays and later phases - background transparent, logo stays small */
+.logo-splash.lightRays {
+    background: transparent;
+    transition: background 1s ease-out;
+}
+
+.logo-splash.lightRays .splash-logo {
+    opacity: 1;
+    transform: scale(0.7);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: none;
+}
+
+/* VCAMP and later - logo stays in final position */
+.logo-splash.vcamp .splash-logo,
+.logo-splash.nav .splash-logo,
+.logo-splash.complete .splash-logo {
+    opacity: 1;
+    transform: scale(0.7);
+    animation: none;
+}
+
+.logo-splash.vcamp,
+.logo-splash.nav,
+.logo-splash.complete {
+    background: transparent;
+}
+
+.logo-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-logo {
+    width: 200px;
+    height: auto;
+    will-change: transform, opacity;
+}
+
+@keyframes logoReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes logoPulseGlow {
+
+    0%,
+    100% {
+        filter: brightness(0) invert(1);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8)) brightness(0) invert(1);
+    }
+}
+
+.logo-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.logo-splash.logo .logo-glow,
+.logo-splash.logoSettled .logo-glow {
+    animation: glowPulse 2s 0.5s ease-in-out forwards;
+}
+
+.logo-splash.lightRays .logo-glow,
+.logo-splash.vcamp .logo-glow,
+.logo-splash.nav .logo-glow,
+.logo-splash.complete .logo-glow {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    z-index: 10;
+}
+
+.hero-layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 80px;
+}
+
+/* ============================================
+   VCAMP Container
+   ============================================ */
+.vcamp-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.vcamp-container.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.vcamp-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Each Letter Row */
+.letter-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.letter-row.visible {
+    animation: rowReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rowReveal {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Main Letters */
+.main-letter {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+    transition: text-shadow 0.3s ease;
+}
+
+.letter-row:hover .main-letter {
+    text-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+}
+
+/* Expansion Letters - Appear one by one */
+.expansion-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-left: 5px;
+    overflow: hidden;
+}
+
+.expansion-horizontal span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gray-500);
+    opacity: 0;
+    transform: translateX(-15px) scale(0.8);
+    display: inline-block;
+    transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.expansion-horizontal span.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+/* Hover effect */
+.letter-row:hover .expansion-horizontal span.visible {
+    color: #fff;
+}
+
+/* Tagline */
+.tagline {
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.tagline.visible {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tagline span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: var(--gray-500);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Hero Navigation
+   ============================================ */
+.hero-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(50px);
+    pointer-events: none;
+}
+
+.hero-nav.visible {
+    animation: navReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    pointer-events: auto;
+}
+
+@keyframes navReveal {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hero-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 25px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.hero-nav.visible .hero-nav-link {
+    animation: linkReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-nav.visible .hero-nav-link[data-index="0"] {
+    animation-delay: 0.1s;
+}
+
+.hero-nav.visible .hero-nav-link[data-index="1"] {
+    animation-delay: 0.2s;
+}
+
+.hero-nav.visible .hero-nav-link[data-index="2"] {
+    animation-delay: 0.3s;
+}
+
+.hero-nav.visible .hero-nav-link[data-index="3"] {
+    animation-delay: 0.4s;
+}
+
+.hero-nav.visible .hero-nav-link[data-index="4"] {
+    animation-delay: 0.5s;
+}
+
+@keyframes linkReveal {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-nav-link:hover {
+    border-color: var(--gray-700);
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateX(-10px);
+}
+
+.nav-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    min-width: 25px;
+}
+
+.nav-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--gray-400);
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.hero-nav-link:hover .nav-text {
+    color: #fff;
+}
+
+/* Social Bar */
+.social-bar {
+    display: flex;
+    gap: 20px;
+    margin-top: 60px;
+    opacity: 0;
+}
+
+.hero-nav.visible .social-bar {
+    animation: fadeInUp 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.social-bar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--gray-700);
+    border-radius: 50%;
+    color: var(--gray-500);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-bar a:hover {
+    border-color: #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-3px);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1024px) {
+    .hero-layout {
+        flex-direction: column;
+        justify-content: center;
+        gap: 60px;
+        padding: 40px;
+    }
+
+    .vcamp-container {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-nav {
+        align-items: center;
+    }
+
+    .main-letter {
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .home,
+    .home * {
+        cursor: auto !important;
+    }
+
+    .main-letter {
+        font-size: 2.5rem;
+        min-width: 50px;
+    }
+
+    .expansion-horizontal span {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-layout {
+        padding: 20px;
+    }
+
+    .hero-nav-link {
+        padding: 12px 20px;
+        gap: 15px;
+    }
+
+    .splash-logo {
+        width: 150px;
+    }
+}

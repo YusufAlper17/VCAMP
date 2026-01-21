@@ -1,0 +1,93 @@
+/* Team Page Styles */
+
+.team-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.team-intro p {
+    font-size: 1.2rem;
+    color: var(--gray-400);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.team-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--gray-800);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    border-color: var(--gray-600);
+    transform: translateY(-5px);
+}
+
+.team-card.featured {
+    border-color: var(--gray-600);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.member-image {
+    margin-bottom: 20px;
+}
+
+.image-placeholder {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2rem;
+    color: var(--gray-500);
+}
+
+.member-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.member-info .role {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.member-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.member-social a {
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--gray-700);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-500);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.member-social a:hover {
+    border-color: #fff;
+    color: #fff;
+}

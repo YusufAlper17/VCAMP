@@ -1,0 +1,23 @@
+.app {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Home page styles */
+.app.home-page {
+  cursor: none;
+}
+
+/* Subpage styles */
+.app.sub-page {
+  cursor: auto;
+}
+
+/* Mobile - always show cursor */
+@media (max-width: 768px) {
+
+  .app,
+  .app * {
+    cursor: auto !important;
+  }
+}

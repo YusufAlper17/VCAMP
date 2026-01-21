@@ -1,0 +1,180 @@
+/* Achievements Page Styles */
+
+.achievements-grid {
+    display: grid;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.achievement-card {
+    display: flex;
+    gap: 30px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--gray-800);
+    border-radius: 16px;
+    padding: 40px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.achievement-card:hover {
+    border-color: var(--gray-600);
+    transform: translateY(-3px);
+}
+
+.achievement-trophy {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.achievement-trophy i {
+    font-size: 3rem;
+    color: #F59E0B;
+}
+
+.achievement-trophy .rank {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: #fff;
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.achievement-content h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.achievement-content .event {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.achievement-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray-400);
+}
+
+/* Events Section */
+.events-section {
+    margin-top: 60px;
+}
+
+.events-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-item {
+    display: flex;
+    gap: 40px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--gray-800);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.event-item:hover {
+    border-color: var(--gray-600);
+}
+
+.event-date {
+    flex-shrink: 0;
+    text-align: center;
+    min-width: 80px;
+}
+
+.event-date .day {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+}
+
+.event-date .month {
+    font-size: 0.9rem;
+    color: var(--gray-400);
+    display: block;
+}
+
+.event-date .year {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    display: block;
+}
+
+.event-content h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.event-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray-400);
+    margin-bottom: 15px;
+}
+
+.event-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-bottom: 15px;
+}
+
+.event-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.event-details span {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+.event-details i {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .achievement-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .achievement-trophy {
+        margin: 0 auto;
+    }
+
+    .event-item {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .event-date {
+        text-align: left;
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+    }
+}

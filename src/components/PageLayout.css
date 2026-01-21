@@ -1,0 +1,171 @@
+/* ============================================
+   Page Layout Styles (Subpages)
+   ============================================ */
+
+.page {
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    padding-bottom: 60px;
+    cursor: auto;
+}
+
+.page * {
+    cursor: auto;
+}
+
+/* Back Button */
+.back-button {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--gray-700);
+    border-radius: 30px;
+    color: var(--gray-400);
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+    color: #fff;
+    transform: translateX(-5px);
+}
+
+.back-button i {
+    font-size: 0.8rem;
+}
+
+/* Page Header */
+.page-header {
+    padding: 120px 60px 60px;
+    text-align: center;
+}
+
+.page-header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--gray-600);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.page-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.page-line {
+    width: 60px;
+    height: 2px;
+    background: #fff;
+    margin: 0 auto;
+}
+
+/* Page Main Content */
+.page-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Page Footer */
+.page-footer {
+    padding: 40px;
+    text-align: center;
+    border-top: 1px solid var(--gray-800);
+    margin-top: 80px;
+}
+
+.page-footer p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+/* ============================================
+   Common Section Styles
+   ============================================ */
+
+.section-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Card Styles */
+.card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--gray-800);
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--gray-600);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+}
+
+/* Grid Layouts */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 100px 20px 40px;
+    }
+
+    .page-main {
+        padding: 0 20px;
+    }
+
+    .back-button {
+        top: 20px;
+        left: 20px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
