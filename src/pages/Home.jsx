@@ -263,7 +263,7 @@ function Home() {
             <div className={`logo-splash ${phase}`}>
                 <div className="logo-container">
                     <img
-                        src="/logo.svg"
+                        src={`${import.meta.env.BASE_URL}logo.svg`}
                         alt="VCAMP Logo"
                         className="splash-logo"
                     />

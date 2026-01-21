@@ -29,6 +29,7 @@ function TargetCursor({ isHomePage }) {
         const handleMouseUp = () => setIsClicking(false)
 
         const handleMouseEnter = (e) => {
+            if (!e.target || typeof e.target.closest !== 'function') return
             const target = e.target.closest('a, button, .cursor-target, .letter-row, .hero-nav-link')
             if (target) {
                 isTargetingRef.current = true
@@ -40,6 +41,7 @@ function TargetCursor({ isHomePage }) {
         }
 
         const handleMouseLeave = (e) => {
+            if (!e.target || typeof e.target.closest !== 'function') return
             const target = e.target.closest('a, button, .cursor-target, .letter-row, .hero-nav-link')
             if (target) {
                 isTargetingRef.current = false
