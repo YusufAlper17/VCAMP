@@ -4,7 +4,7 @@ React + Vite projesi - GitHub Pages'de yayınlanmaktadır.
 
 ## 🚀 Canlı Demo
 
-Projeyi buradan görüntüleyebilirsiniz: `https://KULLANICI_ADINIZ.github.io/vcamp-react/`
+Projeyi buradan görüntüleyebilirsiniz: `https://yusufalper17.github.io/VCAMP/`
 
 ## 📦 Kurulum
 
