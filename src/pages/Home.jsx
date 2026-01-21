@@ -72,7 +72,13 @@ function Home() {
         // Phase 2: Logo appears
         const logoTimer = setTimeout(() => {
             setPhase('logo')
-            playWhooshSound()
+            // Try to play sound, but don't break if autoplay is blocked
+            try {
+                playWhooshSound()
+            } catch (e) {
+                // Autoplay blocked - that's okay, continue animation
+                console.log('Audio autoplay blocked, continuing without sound')
+            }
         }, 500)
 
         // Phase 3: Logo settles
@@ -142,7 +148,11 @@ function Home() {
                         return [...prev, anim.rowIndex]
                     })
                     if (audioRef.current) {
-                        audioRef.current.playMainLetterSound(anim.rowIndex)
+                        try {
+                            audioRef.current.playMainLetterSound(anim.rowIndex)
+                        } catch (e) {
+                            // Autoplay may be blocked
+                        }
                     }
                 } else if (anim.type === 'letter') {
                     setVisibleLetters(prev => {
@@ -154,7 +164,11 @@ function Home() {
                         }
                     })
                     if (audioRef.current) {
-                        audioRef.current.playKeyboardSound()
+                        try {
+                            audioRef.current.playKeyboardSound()
+                        } catch (e) {
+                            // Autoplay may be blocked
+                        }
                     }
                 }
             }, anim.delay)

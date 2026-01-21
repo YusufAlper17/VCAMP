@@ -138,7 +138,17 @@ export function AudioProvider({ children }) {
     const playWhooshSound = useCallback(() => {
         const ctx = initAudioContext()
         if (!ctx || !soundEnabled) return
-        resumeAudio()
+
+        // Resume context if suspended (autoplay policy)
+        if (ctx.state === 'suspended') {
+            ctx.resume().catch(() => {
+                // Can't resume without user interaction
+                return
+            })
+        }
+
+        // Don't play if context isn't running
+        if (ctx.state !== 'running') return
 
         const time = ctx.currentTime
 
@@ -171,7 +181,7 @@ export function AudioProvider({ children }) {
 
         noise.start(time)
         noise.stop(time + 1.2)
-    }, [initAudioContext, resumeAudio, soundEnabled])
+    }, [initAudioContext, soundEnabled])
 
     // Click sound
     const playClickSound = useCallback(() => {
