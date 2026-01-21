@@ -7,54 +7,42 @@ export function AudioProvider({ children }) {
     const [soundEnabled, setSoundEnabled] = useState(true)
     const [isReady, setIsReady] = useState(false)
 
-    // Initialize audio context immediately
+    // Initialize audio context ONLY when needed (lazy initialization)
     const initAudioContext = useCallback(() => {
         if (!audioContextRef.current) {
             try {
                 audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)()
-                // Try to resume immediately
-                if (audioContextRef.current.state === 'suspended') {
-                    audioContextRef.current.resume().then(() => {
-                        setIsReady(true)
-                    }).catch(() => {
-                        // Will need user interaction
-                    })
-                } else {
-                    setIsReady(true)
-                }
+                setIsReady(true)
             } catch (e) {
-                console.log('AudioContext not supported')
+                console.warn('AudioContext not supported:', e)
             }
         }
         return audioContextRef.current
     }, [])
 
-    // Auto-initialize on mount
+    // Setup user interaction listeners to resume audio context
     useEffect(() => {
-        initAudioContext()
-
-        // Resume on any user interaction
         const handleInteraction = () => {
             if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
                 audioContextRef.current.resume().then(() => {
                     setIsReady(true)
+                }).catch(err => {
+                    console.warn('Failed to resume AudioContext:', err)
                 })
             }
         }
 
-        // Try multiple events to unlock audio
-        document.addEventListener('click', handleInteraction, { once: true })
-        document.addEventListener('touchstart', handleInteraction, { once: true })
-        document.addEventListener('keydown', handleInteraction, { once: true })
-        document.addEventListener('mousemove', handleInteraction, { once: true })
+        // Listen for user interactions to unlock audio
+        document.addEventListener('click', handleInteraction)
+        document.addEventListener('touchstart', handleInteraction)
+        document.addEventListener('keydown', handleInteraction)
 
         return () => {
             document.removeEventListener('click', handleInteraction)
             document.removeEventListener('touchstart', handleInteraction)
             document.removeEventListener('keydown', handleInteraction)
-            document.removeEventListener('mousemove', handleInteraction)
         }
-    }, [initAudioContext])
+    }, [])
 
     const resumeAudio = useCallback(() => {
         const ctx = audioContextRef.current
